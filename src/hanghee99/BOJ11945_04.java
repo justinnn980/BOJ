@@ -8,12 +8,13 @@ public class BOJ11945_04 {
         int x = sc.nextInt();
         int y = sc.nextInt();
 
+
         for (int i = 0; i < x; i++) {
-            while (sc.hasNext()) {
-                StringBuilder sb = new StringBuilder(sc.next());
-                System.out.println(sb.reverse());
+            char[] arr = sc.next().toCharArray();
+            for (int j=y-1; j>=0; j--) {
+                System.out.print(arr[j]);
             }
+            System.out.println();
         }
-        sc.close();
     }
 }
