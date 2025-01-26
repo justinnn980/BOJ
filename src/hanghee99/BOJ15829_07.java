@@ -1,6 +1,5 @@
 package hanghee99;
 
-import java.math.BigInteger;
 import java.util.Scanner;
 
 public class BOJ15829_07 {
