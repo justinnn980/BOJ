@@ -9,17 +9,17 @@ public class BOJ31562_09 {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int m = sc.nextInt();
-        sc.nextLine(); // 버퍼 비우기
-        Map<String, String> map = new HashMap<>();
-        while (n-- > 0) {
-            String[] arr = sc.nextLine().split(" ",3);
-            String key = arr[2].substring(0, 5);
+        sc.nextLine(); // 버퍼 초기화
 
-            map.put(key, map.containsKey(key) ? "?\n" : arr[1] + "\n");
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String[] s = sc.nextLine().split(" ",3);
+            String value = s[2].substring(0, 5);
+
+            map.put(value, map.containsKey(value) ? "?\n" : s[1] + "\n");
         }
         while (m-- > 0) {
             System.out.print(map.getOrDefault(sc.nextLine(), "!\n"));
         }
     }
-
 }
