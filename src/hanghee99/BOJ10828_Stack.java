@@ -4,10 +4,8 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class BOJ10828_Stack {
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        StringBuilder sb = new StringBuilder();
 
         Stack<Integer> stack = new Stack<>();
 
