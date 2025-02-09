@@ -1,66 +1,43 @@
 package hanghee99;
 
-import java.util.Objects;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class BOJ4949_15 {
 
-    public static int[] stack;
     public static int size = 0;
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        StringBuilder sb = new StringBuilder();
-
-        stack = new int[100];
 
         while (true) {
             String s = sc.nextLine();
+            if (s.equals(".")) break; // 종료 조건
 
-            if (Objects.equals(s, ".")) {
-                break;
+            if (isBalanced(s)) {
+                System.out.println("yes");
+            } else {
+                System.out.println("no");
             }
+        }
+        sc.close();
+    }
 
-            char[] chars = s.toCharArray();
+    private static boolean isBalanced(String s) {
+        Stack<Character> stack = new Stack<>();
 
-            for (int i = 0; i < chars.length; i++) {
-                char c = chars[i];
-                if (c == '(' || c == '[') {
-                    push(c);
-                } else if (c == ')' || c == ']') {
-                    int re = pop(c);
-                    if (re == 7) {
-                        System.out.println("NO");
-                        break;
-                    }
-                } else if (c == '.') {
-                    break;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(' || c == '[') {
+                stack.push(c);
+            } else if (c == ')' || c == ']') {
+                if (stack.isEmpty()) return false; // 닫는 괄호가 나왔는데 스택이 비어 있음
+
+                char top = stack.pop();
+                if ((c == ')' && top != '(') || (c == ']' && top != '[')) {
+                    return false; // 짝이 맞지 않음
                 }
             }
-
-            if (stack[0] == 0) {
-                System.out.println("YES");
-                size = 0;
-            }
         }
-
+        return stack.isEmpty(); // 스택이 비어 있으면 균형 잡힘
     }
-
-    private static void push(char c) {
-        if (c == '(') {
-            stack[size] = 1;
-            size++;
-        } else if (c == '[') {
-            stack[size] = 2;
-            size++;
-        }
-    }
-
-    private static int pop(char c) {
-        if (size != 0) {
-            
-        }
-        return 0;
-    }
-
 }
