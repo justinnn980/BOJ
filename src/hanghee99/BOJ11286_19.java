@@ -2,10 +2,10 @@ package hanghee99;
 
 import java.util.Scanner;
 
-public class BOJ1927_MinHeap {
+public class BOJ11286_19 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        MinPriorityQueue pq = new MinPriorityQueue();
+        AbsPriorityQueue pq = new AbsPriorityQueue();
 
         int n = sc.nextInt();
         StringBuilder ans = new StringBuilder();
@@ -13,25 +13,24 @@ public class BOJ1927_MinHeap {
         while (n-- > 0) {
             int x = sc.nextInt();
             if (x == 0)
-                ans.append(-pq.pop()).append("\n");
+                ans.append(pq.pop()).append("\n");
             else
-                pq.push(-x);
+                pq.push(x);
         }
 
         System.out.println(ans);
     }
 
-    static class MinPriorityQueue {
+    static class AbsPriorityQueue {
         int[] heap;
         int size;
 
-
-        public MinPriorityQueue() {
-            heap = new int[100000];
+        public AbsPriorityQueue() {
+            heap = new int[100001]; // 인덱스 1부터 사용
             size = 0;
         }
 
-        void swap(int i, int j){
+        void swap(int i, int j) {
             int temp = heap[i];
             heap[i] = heap[j];
             heap[j] = temp;
@@ -43,7 +42,7 @@ public class BOJ1927_MinHeap {
 
             while (current > 1) {
                 int parent = current / 2;
-                if (heap[parent] >= heap[current]) break;
+                if (compare(heap[parent], heap[current]) <= 0) break;
 
                 swap(parent, current);
                 current = parent;
@@ -62,17 +61,24 @@ public class BOJ1927_MinHeap {
                 int right = left + 1;
                 int child = left;
 
-                if (right <= size && heap[left] < heap[right]) {
+                if (right <= size && compare(heap[left], heap[right]) > 0) {
                     child = right;
                 }
 
-                if (heap[current] >= heap[child]) break;
+                if (compare(heap[current], heap[child]) <= 0) break;
 
                 swap(current, child);
                 current = child;
             }
 
             return ret;
+        }
+
+        private int compare(int a, int b) {
+            int absA = Math.abs(a);
+            int absB = Math.abs(b);
+            if (absA == absB) return Integer.compare(a, b); // 값 자체 비교 (음수 우선)
+            return Integer.compare(absA, absB); // 절대값 비교
         }
     }
 }
