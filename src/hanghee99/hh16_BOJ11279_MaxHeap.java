@@ -2,7 +2,7 @@ package hanghee99;
 
 import java.util.Scanner;
 
-public class BOJ11279_MaxHeap {
+public class hh16_BOJ11279_MaxHeap {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         MaxPriorityQueue pq = new MaxPriorityQueue();

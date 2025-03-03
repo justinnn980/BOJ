@@ -2,7 +2,7 @@ package hanghee99;
 
 import java.util.Scanner;
 
-public class BOJ1927_MinHeap {
+public class hh16_BOJ1927_MinHeap {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         MinPriorityQueue pq = new MinPriorityQueue();
