@@ -2,7 +2,7 @@ package hanghee99;
 
 import java.util.Scanner;
 
-public class BOJ11286_19 {
+public class BOJ19_11286 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         AbsPriorityQueue pq = new AbsPriorityQueue();

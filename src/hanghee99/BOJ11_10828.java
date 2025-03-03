@@ -2,7 +2,7 @@ package hanghee99;
 
 import java.util.Scanner;
 
-public class BOJ10828_11 {
+public class BOJ11_10828 {
     public static int[] stack;
     public static int size = 0;
 

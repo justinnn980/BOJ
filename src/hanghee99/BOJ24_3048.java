@@ -2,7 +2,7 @@ package hanghee99;
 
 import java.util.Scanner;
 
-public class BOJ3048_24 {
+public class BOJ24_3048 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         StringBuffer sb = new StringBuffer();
