@@ -2,7 +2,7 @@ package hanghee99;
 
 import java.util.Scanner;
 
-public class BOJ13_10845 {
+public class hh13_BOJ10845 {
     public static int[] queue;
     public static int size = 0;
 

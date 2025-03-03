@@ -3,7 +3,7 @@ package hanghee99;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class BOJ15_4949 {
+public class hh15_BOJ4949 {
 
     public static int size = 0;
     public static void main(String[] args) {

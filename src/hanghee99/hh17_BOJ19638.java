@@ -3,7 +3,7 @@ package hanghee99;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class BOJ17_19638 {
+public class hh17_BOJ19638 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String s = sc.nextLine();

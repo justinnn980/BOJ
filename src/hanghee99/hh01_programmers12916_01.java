@@ -2,7 +2,7 @@ package hanghee99;
 
 import java.util.Scanner;
 
-public class programmers12916_01 {
+public class hh01_programmers12916_01 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int y = 0;

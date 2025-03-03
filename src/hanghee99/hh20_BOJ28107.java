@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class BOJ20_28107 {
+public class hh20_BOJ28107 {
 
     static int n;
     static int m;

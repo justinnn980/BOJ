@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class BOJ14_26043 {
+public class hh14_BOJ26043 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class BOJ10845_Queue {
+public class hh13_BOJ10845_Queue {
 
     public static int size = 0;
 

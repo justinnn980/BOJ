@@ -3,7 +3,7 @@ package hanghee99;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class BOJ27160_Hash {
+public class hh06_BOJ27160_Hash {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();

@@ -3,7 +3,7 @@ package hanghee99;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-public class BOJ11286_absHeapLibrary {
+public class hh19_BOJ11286_absHeapLibrary {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();

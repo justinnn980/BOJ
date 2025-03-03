@@ -2,7 +2,7 @@ package hanghee99;
 
 import java.util.PriorityQueue;
 
-public class programmers42626_16 {
+public class hh16_programmers42626_16 {
     public static void main(String[] args) {
         int[] scoville = new int[]{1, 2, 3, 9, 10, 12};
         int K = 7;
