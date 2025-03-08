@@ -13,13 +13,13 @@ public class hh21_BOJ20291 {
         HashMap<String, Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
             String s = sc.nextLine();
-            String[] parts = s.split("\\."); // 입력값을 공백 기준으로 나누기
-            map.put(parts[1], map.getOrDefault(parts[1], 0) + 1);
+            String[] parts = s.split("\\."); /// 입력값을 공백 기준으로 나누기
+            map.put(parts[1], map.getOrDefault(parts[1], 0) + 1); /// key와 value로 값 저장
         }
-        TreeMap<String, Integer> sortedMap = new TreeMap<>(map);
+        TreeMap<String, Integer> sortedMap = new TreeMap<>(map); /// 정렬
 
         for (Map.Entry<String, Integer> entry : sortedMap.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
+            System.out.println(entry.getKey() + " " + entry.getValue()); /// 출력
         }
     }
 
