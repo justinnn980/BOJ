@@ -1,42 +1,53 @@
 package hanghee99_Beginner;
 
-import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class hh17_BOJ19638 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-        String[] parts = s.split(" "); // 입력값을 공백 기준으로 나누기
+        String str = sc.nextLine();
+        String[] strs = str.split(" ");
 
-        int n = Integer.parseInt(parts[0]);
-        int h = Integer.parseInt(parts[1]);
-        int t = Integer.parseInt(parts[2]);
+        int n = Integer.parseInt(strs[0]);
+        int h = Integer.parseInt(strs[1]);
+        int t = Integer.parseInt(strs[2]);
 
-        int count = 0;
         int[] arr = new int[n];
+        int count = 0;
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
 
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            pq.add(sc.nextInt());
         }
 
         for (int i = 0; i < t; i++) {
-            Arrays.sort(arr);
-            if (arr[arr.length - 1] >= h && arr[arr.length - 1] != 1) {
-                count++;
-                arr[arr.length - 1] =  arr[arr.length - 1] / 2;
-            } else {
+            int max = pq.poll();
+
+            if (max < h) {
+                pq.add(max);
+                break;
+            }
+            if (max == 1) {
+                pq.add(max);
                 break;
             }
 
+            pq.add(max / 2);
+            count++;
         }
 
-        if (arr[arr.length - 1] < h && arr[arr.length - 1] != 0) {
+        // 최대값 확인
+        int maxValue = pq.peek();
+
+        if(maxValue < h) {
             System.out.println("YES");
             System.out.println(count);
         } else {
             System.out.println("NO");
-            System.out.println(arr[arr.length - 1]);
+            System.out.println(maxValue);
         }
     }
 
