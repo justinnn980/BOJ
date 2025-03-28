@@ -1,81 +1,33 @@
 package hanghee99_Beginner;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class hh20_BOJ28107 {
-
-    static int n;
-    static int m;
-    static PriorityQueue<Customer> customers;
-    static PriorityQueue<Integer> susis;
-    static int[] answer;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
 
-        customers = new PriorityQueue<>();
+        Deque<Integer>[] orders = new ArrayDeque[200001];
+        for (int i = 0; i < 200001; i++) orders[i] = new ArrayDeque<>();
 
+        int[] answer = new int[n];
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
-            int number = Integer.parseInt(st.nextToken());
-            while(number-->0) {
-                int susi = Integer.parseInt(st.nextToken());
-                customers.add(new Customer(susi, i));
+            int k = Integer.parseInt(st.nextToken());
+            while(k-->0) {
+                orders[Integer.parseInt(st.nextToken())].add(i);
             }
         }
-        answer = new int[n];
-
         st = new StringTokenizer(br.readLine());
-        susis = new PriorityQueue<>();
-        while (m-->0) {
-            susis.add(Integer.parseInt(st.nextToken()));
+        while(m-->0) {
+            int susi = Integer.parseInt(st.nextToken());
+            if (!orders[susi].isEmpty()) answer[orders[susi].pollFirst()] += 1; ///첫 번째 요소 제거 후 반환
         }
 
-        while (!susis.isEmpty()) {
-            int susi = susis.poll();
-
-            while (!customers.isEmpty() && customers.peek().susi < susi) {
-                customers.poll();
-            }
-
-            if (!customers.isEmpty() && customers.peek().susi == susi) {
-                Customer c = customers.poll();
-
-                // System.out.println(susi + " " + c.susi + " " + c.number);
-
-                answer[c.number] += 1;
-            }
-        }
-
-        for (int i = 0; i < n; i++) {
-            System.out.print(answer[i] + " ");
-        }
-
-    }
-
-    // 스시 번호 오름차순, 스시 번호 같으면 손님 번호 오름차순
-    public static class Customer implements Comparable<Customer> {
-        int susi;
-        int number;
-
-        Customer(int susi, int number) {
-            this.susi = susi;
-            this.number = number;
-        }
-
-        public int compareTo(Customer customer) {
-            if (this.susi == customer.susi) {
-                return this.number - customer.number;
-            }
-            return this.susi - customer.susi;
-        }
+        for (int i = 0; i < n; i++) System.out.print(answer[i] + " ");
     }
 
 }
