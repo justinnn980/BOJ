@@ -8,18 +8,22 @@ public class hh01_BOJ1929 {
         Scanner sc = new Scanner(System.in);
         int m = sc.nextInt();
         int n = sc.nextInt();
-        boolean[] p = new boolean[n + 1];
-        p[1] = true;
 
-        for (int i = 2; i * i <= n; i++) {
-            if (!p[i]) {
-                for (int j = i * i; j <= n; j += i) {
-                    p[j] = true;
+        for (int i = m; i <= n; i++) {
+            boolean isPrime = true;
+
+            if (i < 2) {
+                isPrime = false;
+            } else {
+                for (int j = 2; j <= Math.sqrt(i); j++) {
+                    if (i % j == 0) {
+                        isPrime = false;
+                        break;
+                    }
                 }
             }
-        }
-        for (int i = m; i <= n; i++) {
-            if (!p[i]) {
+
+            if (isPrime) {
                 System.out.println(i);
             }
         }
