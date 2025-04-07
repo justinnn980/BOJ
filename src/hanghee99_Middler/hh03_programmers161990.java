@@ -28,7 +28,7 @@ public class hh03_programmers161990 {
 //        wallpaper[1] = "#.";
 
 
-        System.out.println(solution(wallpaper));
+        System.out.println(Arrays.toString(solution(wallpaper)));
     }
     public static int[] solution(String[] wallpaper) {
         int[] answer = new int[4];
