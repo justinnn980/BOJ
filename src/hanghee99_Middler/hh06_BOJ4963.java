@@ -14,8 +14,8 @@ public class hh06_BOJ4963 {
     static int w, h, nowX, nowY;
 
     public static void main(String[] args) throws IOException {
-        StringBuilder sb = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st;
 
         String str;
