@@ -18,17 +18,18 @@ public class hh12_BOJ2156 {
         }
 
         /// 로직
-        int[] dp = new int[n+1];
-        dp[1] = arr[0];
+        int[] dp = new int[n+1]; ///답을 계산할때 쓸 배열
 
-        if(n <= 1){
+        dp[1] = arr[0]; /// 1번째 잔
+
+        if(n <= 1){ /// 1보다 작은 배열
             System.out.println(dp[n]);
             return;
         }
 
-        dp[2] = dp[1] + arr[1];
+        dp[2] = dp[1] + arr[1]; /// 2번째 잔, 2잔을 연속으로 마실 수 있음
 
-        if(n <= 2){
+        if(n <= 2){ /// 2보다 작은 배열
             System.out.println(dp[n]);
             return;
         }
