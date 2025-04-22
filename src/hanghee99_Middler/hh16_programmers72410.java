@@ -7,56 +7,41 @@ public class hh16_programmers72410 {
         System.out.println(solution(s));
     }
     public static String solution(String new_id) {
+        // 1단계: 소문자로 치환
         new_id = new_id.toLowerCase();
-        String answer = "";
-        for(int i = 0; i < new_id.length(); i++) {
-            char ch = new_id.charAt(i);
 
-            if(ch >= 'a' && ch <= 'z') {
-                answer += String.valueOf(ch);
-            } else if(ch >= '0' && ch <= '9') {
-                answer += String.valueOf(ch);
-            } else if(ch == '.' || ch == '-' || ch == '_') {
-                answer += String.valueOf(ch);
+        // 2단계: 허용된 문자만 StringBuilder에 추가
+        StringBuilder sb = new StringBuilder();
+        for (char ch : new_id.toCharArray()) {
+            if ((ch >= 'a' && ch <= 'z') ||
+                (ch >= '0' && ch <= '9') ||
+                ch == '-' || ch == '_' || ch == '.') {
+                sb.append(ch);
             }
         }
 
-        for (int i = 0; i<answer.length(); i++){
-            if (answer.charAt(i) == '.'){
-                int j = i+1;
-                String dot = ".";
+        // 3단계: 마침표(.)가 2번 이상이면 하나로 치환
+        String temp = sb.toString().replaceAll("\\.{2,}", ".");
 
-                while(j != answer.length() && answer.charAt(j) == '.') {
-                    dot += ".";
-                    j++;
-                }
+        // 4단계: 처음과 끝의 마침표 제거
+        temp = temp.replaceAll("^\\.|\\.$", "");
 
-                if(dot.length() > 1)
-                    answer = answer.replace(dot, ".");
-            }
-        }
-        if(answer.startsWith(".") ) {
-            answer = answer.substring(1, answer.length());
-        } else if(answer.endsWith(".")) {
-            answer = answer.substring(0, answer.length()-1);
-        }
-        if(answer.length() == 0) {
-            answer += "a";
-        }
-        if(answer.length() >= 16) {
-            answer = answer.substring(0, 15);
-        }
-        if(answer.endsWith(".")) {
-            answer = answer.substring(0, answer.length()-1);
-        }
-        // 7. 2자 이하라면, 마지막 문자 길이 3까지 반복해서 붙임
-        String last = answer.charAt(answer.length()-1) + "";
-        if(answer.length() == 2) {
-            answer = answer + last;
-        } else if(answer.length() == 1) {
-            answer = answer + last + last;
+        // 5단계: 빈 문자열이면 "a" 대입
+        if (temp.isEmpty()) {
+            temp = "a";
         }
 
-        return answer;
+        // 6단계: 길이가 16자 이상이면 15자로 자르고, 끝이 마침표면 제거
+        if (temp.length() >= 16) {
+            temp = temp.substring(0, 15);
+            temp = temp.replaceAll("\\.$", "");
+        }
+
+        // 7단계: 길이가 2자 이하이면, 마지막 문자를 반복
+        while (temp.length() < 3) {
+            temp += temp.charAt(temp.length() - 1);
+        }
+
+        return temp;
     }
 }
