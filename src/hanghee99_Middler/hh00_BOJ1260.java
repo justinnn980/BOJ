@@ -15,8 +15,8 @@ public class hh00_BOJ1260 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        n = Integer.parseInt(st.nextToken()); // 정점 개수
-        int m = Integer.parseInt(st.nextToken()); // 간선 개수
+        n = Integer.parseInt(st.nextToken()); // 정점 개수(점)
+        int m = Integer.parseInt(st.nextToken()); // 간선 개수(선)
         int v = Integer.parseInt(st.nextToken()); // 시작 정점
 
         graph = new int[n + 1][n + 1];
@@ -27,11 +27,11 @@ public class hh00_BOJ1260 {
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
 
-            graph[a][b] = 1;
-            graph[b][a] = 1;
+            graph[a][b] = 1; /// a에서 b로 가는 간선 표시
+            graph[b][a] = 1; /// b에서 a로 가는 간선도 표시 (무방향이므로 양쪽 다 설정)
         }
 
-        visited = new boolean[n + 1];
+        visited = new boolean[n + 1]; /// 중복 방문을 막기 위한 배열
         dfs(v);
         System.out.println();
 
