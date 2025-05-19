@@ -1,6 +1,13 @@
 package BFSDFS;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 public class DFSwithGun {
     /// Visited = 이미 방문한 노드 기록용 자료구조
@@ -20,17 +27,29 @@ public class DFSwithGun {
         stack.push(start);
 
         while (!stack.isEmpty()) {
+            System.out.println(stack);
+
+
             int vertex = stack.pop();
 
             if (!visited.contains(vertex)) {
                 visited.add(vertex);
                 route.add(vertex);
 
-                // 리스트를 역순으로 순회해서 스택에 넣음
+
+                // 자식 노드를 역순으로 추가
                 List<Integer> neighbors = graph.get(vertex);
                 for (int i = neighbors.size() - 1; i >= 0; i--) {
                     stack.push(neighbors.get(i));
                 }
+
+                  // 자식 노드를 역순으로 추가
+//                List<Integer> neighbors = graph.get(vertex);
+//                ListIterator<Integer> iter = neighbors.listIterator(neighbors.size());
+//                while (iter.hasPrevious()) {
+//                    int neighbor = iter.previous();
+//                    stack.push(neighbor);
+//                }
             }
         }
 
