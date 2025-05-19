@@ -16,7 +16,7 @@ public class BFSwithGun {
     /// Queue = BFS 로직에 이용되는 자료구조
     /// vertex = 현재 보는 노드 임시 변수
     // 1. 첫 노드를 Queue와 Visited에 먼저 넣는다.
-    // 1-1 Queue에 내용이 있는가? 1-2 Queue에 pop해서 vertex에 이동, route에 추가
+    // 1-1 Queue에 내용이 있는가? 1-2 Queue에 pop해서 route에 추가
     // 인접한 노드 중 처음보는 친구가 있나? 있다면
     // 1. vertex에 추가 2.큐에 추가
     // 없다면 종료
@@ -33,13 +33,23 @@ public class BFSwithGun {
             int vertex = queue.poll();  // queue.pop(0) 과 같음
             route.add(vertex);
 
-            for (int neighbor : graph.get(vertex)) {
+            List<Integer> neighbors = graph.get(vertex);
+            for (int i = 0; i < neighbors.size(); i++) {
+                int neighbor = neighbors.get(i);
                 if (!visited.contains(neighbor)) {
                     visited.add(neighbor);
                     queue.add(neighbor);
-                    System.out.println(queue);
                 }
             }
+
+//            for (int neighbor : graph.get(vertex)) {
+//                if (!visited.contains(neighbor)) {
+//                    visited.add(neighbor);
+//                    queue.add(neighbor);
+//                }
+//            }
+            
+            System.out.println(queue);
         }
 
         return route;
