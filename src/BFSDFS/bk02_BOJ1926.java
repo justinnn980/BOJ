@@ -18,21 +18,21 @@ public class bk02_BOJ1926 {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                /// 도화지의 그림
+                // 도화지의 그림
                 board[i][j] = sc.nextInt();
             }
         }
 
-        /// 가장 넒은 그림의 넓이
+        // 가장 넒은 그림의 넓이
         int mx = 0;
-        /// 그림의 개수
+        // 그림의 개수
         int num = 0;
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) { // i,j 를 시작점으로 하고 싶은 상황
                 if (board[i][j] == 0 || vis[i][j]) continue; // 색칠이 안되어 있거나 방문한 경우 넘어감
 
-                /// 새로운 그림에 속해있는 시작점
+                // 새로운 그림에 속해있는 시작점
                 // 그림의 수 1 증가
                 num++;
 
@@ -61,5 +61,4 @@ public class bk02_BOJ1926 {
         System.out.println(num);
         System.out.println(mx);
     }
-
 }
