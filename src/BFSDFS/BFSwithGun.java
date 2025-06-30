@@ -11,8 +11,8 @@ import java.util.Queue;
 import java.util.LinkedList;
 
 public class BFSwithGun {
-    /// Route = BFS의 최종 경로를 담는 자료구조
     /// Visited = 방문한 노드 기록용 자료구조
+    /// Route = BFS의 최종 경로를 담는 자료구조
     /// Queue = BFS 로직에 이용되는 자료구조
     /// vertex = 현재 보는 노드 임시 변수
     // 1. 첫 노드를 Queue와 Visited에 먼저 넣는다.
@@ -33,7 +33,7 @@ public class BFSwithGun {
             int vertex = queue.poll();  // queue.pop(0) 과 같음
             route.add(vertex);
 
-            List<Integer> neighbors = graph.get(vertex);
+            List<Integer> neighbors = graph.get(vertex); // 인접한 노드 중 첨보는 친구가 있는가
             for (int i = 0; i < neighbors.size(); i++) {
                 int neighbor = neighbors.get(i);
                 if (!visited.contains(neighbor)) {
