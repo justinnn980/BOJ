@@ -36,7 +36,7 @@ public class BFSwithGun {
             List<Integer> neighbors = graph.get(vertex); // 인접한 노드 중 첨보는 친구가 있는가
             for (int i = 0; i < neighbors.size(); i++) {
                 int neighbor = neighbors.get(i);
-                if (!visited.contains(neighbor)) {
+                if (!visited.contains(neighbor)) { // set안에 노드라는 값이 있는지 관련하여 검토 없다면 방문한적 없는 노드이다.
                     visited.add(neighbor);
                     queue.add(neighbor);
                 }

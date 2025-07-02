@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class bk02_BOJ1926 {
     static int[][] board = new int[502][502]; // 1이 파란 칸, 0이 빨간 칸에 대응
     static boolean[][] vis = new boolean[502][502]; // 해당 칸을 방문했는지 여부를 저장
-    static int n, m;
     static int[] dx = {1, 0, -1, 0};
     static int[] dy = {0, 1, 0, -1}; // 상하좌우 네 방향을 의미
 
@@ -30,17 +29,19 @@ public class bk02_BOJ1926 {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) { // i,j 를 시작점으로 하고 싶은 상황
-                if (board[i][j] == 0 || vis[i][j]) continue; // 색칠이 안되어 있거나 방문한 경우 넘어감
+                if (board[i][j] == 0 || vis[i][j]) continue; // 색칠이 안되어 있거나(0) 방문한 경우 넘어감
 
                 // 새로운 그림에 속해있는 시작점
                 // 그림의 수 1 증가
                 num++;
 
+                // bfs
                 Queue<int[]> queue = new LinkedList<>();
                 vis[i][j] = true; // 방문 표시
                 queue.add(new int[]{i, j});
                 int area = 0; // 그림의 넓이
 
+                // 탐색 시작
                 while (!queue.isEmpty()) {
                     area++; // 큐에서 꺼낼 때마다 넓이 증가
                     int[] cur = queue.poll();
@@ -49,9 +50,9 @@ public class bk02_BOJ1926 {
                     for (int k = 0; k < 4; k++) { // 상하좌우 확인
                         int nx = x + dx[k];
                         int ny = y + dy[k];
-                        if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
-                        if (board[nx][ny] == 0 || vis[nx][ny]) continue;
-                        vis[nx][ny] = true;
+                        if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue; // 격자판의 범위를 벗어났으면 무시
+                        if (board[nx][ny] == 0 || vis[nx][ny]) continue; // 이미 방문했거나, 그림이 아닌곳(0)이면 무시
+                        vis[nx][ny] = true; // 방문하지 않은 곳이면 방문 처리 후, 큐에 넣기
                         queue.add(new int[]{nx, ny});
                     }
                 }
