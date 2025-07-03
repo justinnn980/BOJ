@@ -5,8 +5,6 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class bk02_BOJ1926 {
-    static int[][] board = new int[502][502]; // 1이 파란 칸, 0이 빨간 칸에 대응
-    static boolean[][] vis = new boolean[502][502]; // 해당 칸을 방문했는지 여부를 저장
     static int[] dx = {1, 0, -1, 0};
     static int[] dy = {0, 1, 0, -1}; // 상하좌우 네 방향을 의미
 
@@ -15,51 +13,56 @@ public class bk02_BOJ1926 {
         int n = sc.nextInt();
         int m = sc.nextInt();
 
+        int[][] board = new int[n][m];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                // 도화지의 그림
                 board[i][j] = sc.nextInt();
             }
         }
 
-        // 가장 넒은 그림의 넓이
-        int mx = 0;
-        // 그림의 개수
-        int num = 0;
+        boolean[][] visited = new boolean[n][m];
+        int cnt = 0;
+        int big = 0;
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) { // i,j 를 시작점으로 하고 싶은 상황
-                if (board[i][j] == 0 || vis[i][j]) continue; // 색칠이 안되어 있거나(0) 방문한 경우 넘어감
+            for (int j = 0; j < m; j++) {
+                // 이미 방문했다면 무시하고 다음칸
+                if (board[i][j] == 0 || visited[i][j]) continue;
 
-                // 새로운 그림에 속해있는 시작점
-                // 그림의 수 1 증가
-                num++;
+                // 통과했다면 새그림 발견한 것
+                cnt++;
 
                 // bfs
                 Queue<int[]> queue = new LinkedList<>();
-                vis[i][j] = true; // 방문 표시
-                queue.add(new int[]{i, j});
+                visited[i][j] = true; // 시작점 방문 표시
+                queue.add(new int[]{i, j}); // 큐에 시작점 추가
+
                 int area = 0; // 그림의 넓이
 
-                // 탐색 시작
                 while (!queue.isEmpty()) {
-                    area++; // 큐에서 꺼낼 때마다 넓이 증가
+                    area++; // 큐에서 하나 꺼낼때마다 넓이 증가
                     int[] cur = queue.poll();
                     int x = cur[0];
                     int y = cur[1];
-                    for (int k = 0; k < 4; k++) { // 상하좌우 확인
+
+                    // 꺼낸 좌표에서 상하좌우 확인
+                    for (int k = 0; k < 4; k++) {
                         int nx = x + dx[k];
                         int ny = y + dy[k];
-                        if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue; // 격자판의 범위를 벗어났으면 무시
-                        if (board[nx][ny] == 0 || vis[nx][ny]) continue; // 이미 방문했거나, 그림이 아닌곳(0)이면 무시
-                        vis[nx][ny] = true; // 방문하지 않은 곳이면 방문 처리 후, 큐에 넣기
+                        // 이웃이 범위를 벗어나거나, 그림이 아니거나, 이미 방문했다면 무시
+                        if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
+                        if (board[nx][ny] == 0 || visited[nx][ny]) continue;
+                        // 방문처리
+                        visited[nx][ny] = true;
                         queue.add(new int[]{nx, ny});
                     }
                 }
-                mx = Math.max(mx, area); // 최댓값 갱신
+                // 최대 값 갱신
+                big = Math.max(big, area); // 최댓값 갱신
+
             }
         }
-        System.out.println(num);
-        System.out.println(mx);
+        System.out.println(cnt);
+        System.out.println(big);
     }
 }
