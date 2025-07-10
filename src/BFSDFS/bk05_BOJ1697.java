@@ -1,34 +1,46 @@
 package BFSDFS;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class bk05_BOJ1697 {
-    static int[] dist = new int[100002];
-    static int n, k;
+    static final int Max = 100000;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int k = sc.nextInt();
 
-        Arrays.fill(dist, -1);
-        dist[n] = 0;
+        int result = bfs(n,k);
+        System.out.println(result);
+    }
+    private static int bfs(int start, int end) {
+        if(start == end) return 0;
+        Queue<Integer> queue = new LinkedList<>();
+        int[] time = new int[Max+1];
+        boolean[] visited = new boolean[Max+1];
 
-        Queue<Integer> q = new LinkedList<>();
-        q.add(n);
+        queue.add(start);
+        visited[start] = true;
+        time[start] = 0;
 
-        while (dist[k] == -1) {
-            int cur = q.poll();
-            for (int next : new int[]{cur - 1, cur + 1, 2 * cur}) {
-                if (next < 0 || next > 100000) continue;
-                if (dist[next] != -1) continue;
-                dist[next] = dist[cur] + 1;
-                q.add(next);
+        while(!queue.isEmpty()){
+            int now = queue.poll();
+            int[] nextPositions = {now - 1, now + 1
+                , now * 2};
+
+            for(int next : nextPositions){
+                if(next >= 0 && next <= Max && !visited[next]){
+                    visited[next] = true;
+                    time[next] = time[now] + 1;
+                    queue.add(next);
+                    if(next == end) {
+                        return time[next];
+                    }
+                }
             }
         }
 
-        System.out.println(dist[k]);
+        return -1;
     }
 }
