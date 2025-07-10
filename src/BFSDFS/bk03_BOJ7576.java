@@ -5,10 +5,6 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class bk03_BOJ7576 {
-
-    static int[][] board = new int[1002][1002];
-    static int[][] dist = new int[1002][1002];
-    static int n, m;
     static int[] dx = {1, 0, -1, 0};
     static int[] dy = {0, 1, 0, -1};
 
@@ -16,17 +12,21 @@ public class bk03_BOJ7576 {
         Scanner sc = new Scanner(System.in);
         int m = sc.nextInt();
         int n = sc.nextInt();
-
+        sc.nextLine();
         Queue<int[]> q = new LinkedList<>();
+
+        int[][] board = new int[n][m];
+        int[][] dist = new int[n][m];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 board[i][j] = sc.nextInt();
+
                 if (board[i][j] == 1) {
                     q.add(new int[]{i, j});
                 }
                 if (board[i][j] == 0) {
-                    dist[i][j] = -1; // 익지 않은 토마토는 -1로 초기화
+                    dist[i][j] = -1;
                 }
             }
         }
@@ -35,9 +35,9 @@ public class bk03_BOJ7576 {
             int x = cur[0];
             int y = cur[1];
 
-            for (int dir = 0; dir < 4; dir++) {
-                int nx = x + dx[dir];
-                int ny = y + dy[dir];
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
 
                 if (nx < 0 || nx >= n || ny < 0 || ny >= m) {
                     continue;
@@ -60,7 +60,6 @@ public class bk03_BOJ7576 {
                 ans = Math.max(ans, dist[i][j]);
             }
         }
-
         System.out.println(ans);
     }
 }
