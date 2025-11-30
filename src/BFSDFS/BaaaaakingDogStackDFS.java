@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BaaaaakingDogStackDFS {
-    /// 판
     static int[][] board = {
         {1,1,1,0,1,0,0,0,0,0},
         {1,0,0,0,1,0,0,0,0,0},
