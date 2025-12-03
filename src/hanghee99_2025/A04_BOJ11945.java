@@ -16,7 +16,7 @@ public class A04_BOJ11945 {
             String s = br.readLine();
             int[] arr = new int[M];
             for (int j = 0; j < M; j++) {
-                arr[j] = s.charAt(j) - '0';
+                arr[j] = s.charAt(j) - '0'; //유니코드
             }
             for (int j = M; j > 0; j--) {
                 System.out.print(arr[j-1]);
