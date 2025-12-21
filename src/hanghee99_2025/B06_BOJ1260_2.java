@@ -39,20 +39,22 @@ public class B06_BOJ1260_2 {
         visited = new boolean[N + 1];
         DFS(start);
         System.out.println(sb.toString());
+        sb.setLength(0);
         visited = new boolean[N + 1];
         BFS(start);
-        System.out.println();
+        System.out.println(sb.toString());
     }
 
+    /// BFS는 시작 노드로 하는게 아닌 시작 노드를 que에 넣어서 que에 나오는 값으로 구한다
     private static void BFS(int start) {
         Queue<Integer> queue = new LinkedList<>();
-        queue.add(start);
-        visited[start] = true;
-        while (!queue.isEmpty()) {
-            int cur = queue.poll(); // cur = 노드에 연결된 엣지 정보를 알고싶다
-            System.out.print(cur+" ");
+        queue.add(start); //que에 시작노드 넣기
+        visited[start] = true; //방문하면 true
+        while (!queue.isEmpty()) { //que가 비었을때까지
+            int cur = queue.poll(); // 시작 노드 구하기
+            sb.append(cur).append(" "); // 값!!!!
             for (int i = 0; i < list[cur].size(); i++) {
-                if (!visited[list[cur].get(i)]) {
+                if (!visited[list[cur].get(i)]) { // 방문하지 않은 노드면
                     visited[list[cur].get(i)] = true;
                     queue.add(list[cur].get(i));
                 }
@@ -61,11 +63,11 @@ public class B06_BOJ1260_2 {
     }
 
     private static void DFS(int start) {
-        sb.append(start).append(" "); // 방문값 넣기
+        sb.append(start).append(" "); // 값 넣기
         visited[start] = true; // 방문하면 true
         for (int i = 0; i < list[start].size(); i++) {
             int idx = list[start].get(i); //리스트 1부터 돌면서
-            if (!visited[idx]) {//방문하지 않은 노드면
+            if (!visited[idx]) { //방문하지 않은 노드면
                 DFS(idx); // 반복
             }
         }
