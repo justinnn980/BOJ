@@ -8,36 +8,29 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class A06_BOJ1260_3 {
-    static boolean[] visited;
-    static ArrayList<Integer>[] list;
+public class B06_BOJ1260_3 {
+    /* 정의 2개 */
+    /// 1. 방문 배열
+    /// 2. ArrayList
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int V = Integer.parseInt(st.nextToken());
-        //리스트 선언
-        list = new ArrayList[N + 1];
+        /* 값 받기 및 정의하기 */
 
-        //리스트 초기화
+        /* 각 정점에 대한 인접 리스트를 담을 배열 생성 (아직 내부 리스트는 없음) */
+
+        /* 각 정점 번호마다 인접 리스트(ArrayList)를 실제로 생성 */
 
 
-        //그래프에 데이터 저장하기
+        /* 그래프에 데이터 저장하기 */
 
+        /* 리스트 오름차순 정렬 */
 
-        //리스트 오름차순 정렬
-
-
-        //방문 배열초기화
-        visited = new boolean[N + 1];
-        DFS(V);
-        System.out.println();
-        //방문 배열초기화
-        visited = new boolean[N + 1];
-        BFS(V);
-        System.out.println();
+        /* 방문 배열초기화 */
+        /// DFS
+        /* 방문 배열초기화 */
+        /// BFS
     }
 
     private static void DFS(int v) {
@@ -45,7 +38,6 @@ public class A06_BOJ1260_3 {
         * 2. 방문
         * 3. 조건에 따라 반복하여 회귀
         * */
-
     }
 
     private static void BFS(int v) {
@@ -57,7 +49,6 @@ public class A06_BOJ1260_3 {
         * 출력 후
         * 5. 조건에 맞게 반복(조건: q에 값 넣은 후 방문)
         */
-
     }
 
 
