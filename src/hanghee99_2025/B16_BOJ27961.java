@@ -17,7 +17,7 @@ public class B16_BOJ27961 {
         long pow = 1; // 2^t
         int t = 0;
         while (pow < N) {
-            pow <<= 1;
+            pow = pow * 2;
             t++;
         }
 
