@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class must1_BOJ1260 {
@@ -32,6 +34,9 @@ public class must1_BOJ1260 {
         }
         visited = new boolean[N + 1];
         DFS(V);
+        System.out.println();
+        visited = new boolean[N + 1];
+        BFS(V);
     }
     public static void DFS(int v) {
         System.out.print(v+" ");
@@ -39,6 +44,21 @@ public class must1_BOJ1260 {
         for (int i = 0; i < list[v].size(); i++) {
             if (!visited[list[v].get(i)]) {
                 DFS(list[v].get(i));
+            }
+        }
+    }
+    public static void BFS(int v) {
+        Queue queue = new LinkedList();
+        queue.offer(v);
+        visited[v] = true;
+        while (!queue.isEmpty()) {
+            v = (int) queue.poll();
+            System.out.print(v+" ");
+            for (int i = 0; i < list[v].size(); i++) {
+                if (!visited[list[v].get(i)]) {
+                    queue.offer(list[v].get(i));
+                    visited[list[v].get(i)] = true;
+                }
             }
         }
     }
