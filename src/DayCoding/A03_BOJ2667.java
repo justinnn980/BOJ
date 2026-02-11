@@ -3,7 +3,7 @@ package DayCoding;
 import java.io.*;
 import java.util.*;
 
-public class A03 {
+public class A03_BOJ2667 {
     static int N;
     static int[][] map;
     static boolean[][] visited;

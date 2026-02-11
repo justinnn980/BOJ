@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class A01 {
+public class A01_BOJ1890 {
     static int[][] map;
     static long[][] result;
     public static void main(String[] args) throws IOException {
