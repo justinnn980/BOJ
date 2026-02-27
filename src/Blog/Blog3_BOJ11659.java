@@ -19,25 +19,17 @@ public class Blog3_BOJ11659 {
         for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
-        int[] s = new int[N];
-        for (int i = 0; i < N; i++) {
-            if (i == 0){
-                s[i] = arr[i];
-            }else {
-                s[i] = s[i-1] + arr[i];
-            }
+        int[] s = new int[N + 1];
+
+        for (int i = 1; i <= N; i++) {
+            s[i] = s[i - 1] + arr[i - 1];
         }
-        for (int i = 0; i < M; i++) {
+        for (int i = 1; i <= M; i++) {
             st = new StringTokenizer(br.readLine());
             int start = Integer.parseInt(st.nextToken());
             int end = Integer.parseInt(st.nextToken());
-            int result;
-            if (start == 1) {
-                result = s[end-1];
-            } else {
-                result = s[end-1] - s[start-2];
+            int result = s[end] - s[start-1];
 
-            }
             sb.append(result).append("\n");
         }
         System.out.print(sb);
