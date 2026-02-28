@@ -21,12 +21,11 @@ public class Blog9_BOJ11286 {
     }
 
     private static void Solution(int[] x) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>(
-                (a, b) -> {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> {
                     if (Math.abs(a) == Math.abs(b)) {
-                        return a - b; // 절댓값 같으면 실제 값 작은 것 우선
+                        return a > b ? 1 : -1; // 절댓값 같으면 실제 값 작은 것 우선
                     }
-                    return Math.abs(a) - Math.abs(b);
+                    return Math.abs(a) - Math.abs(b); // 절대값 작은 데이터 우선
                 }
         );
         for (int i = 0; i < N; i++) {
