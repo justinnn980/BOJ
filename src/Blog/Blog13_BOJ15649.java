@@ -20,9 +20,34 @@ public class Blog13_BOJ15649 {
 
     // 👉 프로그래머스 스타일
     public static String solution(int n, int m) {
+        StringBuilder sb = new StringBuilder();
+        boolean[] visited = new boolean[n + 1];
+        int[] selected = new int[m];
 
-        // 여기에 백트래킹 로직 작성
+        dfs(0, n, m, visited, selected, sb);
 
-        return "";
+        return sb.toString();
+    }
+
+    private static void dfs(int depth, int n, int m, boolean[] visited, int[] selected, StringBuilder sb) {
+        // 종료 조건
+        if (depth == m) {
+            for (int i = 0; i < m; i++) {
+                sb.append(selected[i]).append(" ");
+            }
+            sb.append("\n");
+            return;
+        }
+
+        for (int i = 1; i <= n; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                selected[depth] = i;
+
+                dfs(depth + 1, n, m, visited, selected, sb);
+
+                visited[i] = false;  // 🔥 백트래킹 핵심
+            }
+        }
     }
 }
