@@ -28,6 +28,33 @@ public class Blog12_BOJ11724 {
         System.out.println(solution(N, edges));
     }
 
+    public static int solution3(int n, int[][] edges) {
+        A = new ArrayList[n + 1];
+        visited = new boolean[n + 1];
+
+        for (int i = 1; i <= n; i++) {
+            A[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < edges.length; i++) {
+            int v = edges[i][0];
+            int u = edges[i][1];
+
+            A[u].add(v);
+            A[v].add(u);
+        }
+
+        int count = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]){
+                DFS(i);
+                count++;
+            }
+
+        }
+        return count;
+    }
     public static int solution(int n, int[][] edges) {
         A = new ArrayList[n + 1];
         visited = new boolean[n + 1];
