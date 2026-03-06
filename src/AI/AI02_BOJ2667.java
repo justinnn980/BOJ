@@ -21,7 +21,7 @@ result에 count 저장
 ↓
 단지 수 증가
 */
-public class AO02_BOJ2667 {
+public class AI02_BOJ2667 {
     static int[] dx = {1,-1,0,0};
     static int[] dy = {0,0,1,-1};
     static int N;

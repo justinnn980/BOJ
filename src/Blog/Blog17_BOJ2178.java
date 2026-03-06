@@ -26,10 +26,10 @@ public class Blog17_BOJ2178 {
             }
         }
 
-        System.out.println(solution(N, M, maze));
+        System.out.println(solution2(N, M, maze));
     }
 
-    public static int solution(int N, int M, int[][] maze) {
+    public static int solutionss(int N, int M, int[][] maze) {
     // 자료구조 초기화
 
     // 시작위치 큐에 넣고 방문처리
