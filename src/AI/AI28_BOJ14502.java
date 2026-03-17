@@ -10,13 +10,13 @@ import java.util.StringTokenizer;
 public class AI28_BOJ14502 {
     static int N, M;
     static int[][] map;
-    static int[] dx = {-1,1,0,0};
-    static int[] dy = {0,0,-1,1};
+    static int[] dx = {-1, 1, 0, 0};
+    static int[] dy = {0, 0, -1, 1};
     static int result = 0;
     // makeWall 재귀
-    //카피 후 초기값 넣기
-    //bfs
-    //safe수 count
+    // map 복사 + 바이러스 위치 큐에 넣기
+    // bfs로 0 바이러스로 만들기
+    // safe수 count
 
 
     public static void main(String[] args) throws IOException {
@@ -47,12 +47,11 @@ public class AI28_BOJ14502 {
             return;
         }
 
-        // 재귀
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 if (map[i][j] == 0) {
                     map[i][j] = 1;
-                    makeWall(count + 1);
+                    makeWall(count+1);
                     map[i][j] = 0;
                 }
             }
@@ -60,8 +59,8 @@ public class AI28_BOJ14502 {
     }
 
     private static void spreadVirus() {
-        int[][] copyMap = new int[N][M];
         Queue<int[]> q = new LinkedList<>();
+        int[][] copyMap = new int[N][M];
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
@@ -73,10 +72,9 @@ public class AI28_BOJ14502 {
         }
 
         while (!q.isEmpty()) {
-            int[] cur = q.poll();
-            int x = cur[0];
-            int y = cur[1];
-
+            int[] now = q.poll();
+            int x = now[0];
+            int y = now[1];
             for (int i = 0; i < 4; i++) {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
@@ -85,10 +83,9 @@ public class AI28_BOJ14502 {
                 if (copyMap[nx][ny] != 0) continue;
 
                 copyMap[nx][ny] = 2;
-                q.offer(new int[]{nx, ny});
+                q.offer(new int[]{nx,ny});
             }
         }
-
         int safe = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
