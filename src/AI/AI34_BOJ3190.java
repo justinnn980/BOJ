@@ -66,11 +66,11 @@ public class AI34_BOJ3190 {
             int nx = r + dx[d];
             int ny = c + dy[d];
 
-            if (nx < 0 || ny < 0 || nx >= N || ny >= N || map[nx][ny] == 2) break;
+            if (nx < 0 || ny < 0 || nx >= N || ny >= N || map[nx][ny] == 2) continue;
 
             boolean apple = (map[nx][ny] == 1);
 
-            snake.add(new int[]{nx,ny});
+            snake.add(new int[]{nx, ny});
             map[nx][ny] = 2;
             r = nx;
             c = ny;
@@ -84,9 +84,9 @@ public class AI34_BOJ3190 {
                 char dirInfo = hashMap.get(time);
 
                 if (dirInfo == 'L') {
-                    d = (d + 3) % 4;
+                    d = (d+3) % 4;
                 } else if (dirInfo == 'D') {
-                    d = (d + 1) % 4;
+                    d = (d+1) % 4;
                 }
             }
         }
