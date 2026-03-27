@@ -44,23 +44,12 @@ public class AI43_BOJ16236 {
         }
 
         while (true) {
-            bfs(x, y);
+            int[] target = bfs(x, y);
 
-            if (fish.isEmpty()) break;
+            if (target == null) break;
 
-            //후보 중 우선순위대로 1마리 선택
-            fish.sort((a, b) -> {
-                if (dist[a[0]][a[1]] != dist[b[0]][b[1]]) {
-                    return dist[a[0]][a[1]] - dist[b[0]][b[1]];
-                }
-                if (a[0] != b[0]) return a[0] - b[0];
-                return a[1] - b[1];
-            });
-
-            //그 물고기 위치로 이동
-            int[] cur = fish.get(0);
-            x = cur[0];
-            y = cur[1];
+            x = target[0];
+            y = target[1];
 
             map[x][y] = 0;
             time += dist[x][y];
@@ -74,7 +63,7 @@ public class AI43_BOJ16236 {
         System.out.println(time);
     }
 
-    private static void bfs(int x, int y) {
+    private static int[] bfs(int x, int y) {
         Queue<int[]> q = new LinkedList<>();
         q.offer(new int[]{x,y});
 
@@ -84,11 +73,31 @@ public class AI43_BOJ16236 {
 
         visited[x][y] = true;
 
+        int minDist = Integer.MAX_VALUE;
+        int targetX = -1;
+        int targetY = -1;
+
         while (!q.isEmpty()) {
             int[] cur = q.poll();
             int ax = cur[0];
             int ay = cur[1];
 
+            if (dist[ax][ay] > minDist) break;
+
+            if (map[ax][ay] > 0 && map[ax][ay] < SharkSize) {
+
+                if (dist[ax][ay] < minDist) {
+                    minDist = dist[ax][ay];
+                    targetX = ax;
+                    targetY = ay;
+                }
+                else if (dist[ax][ay] == minDist) {
+                    if (ax < targetX || (ax == targetX && ay < targetY)) {
+                        targetX = ax;
+                        targetY = ay;
+                    }
+                }
+            }
             for (int i = 0; i < 4; i++) {
                 int nx = ax + dx[i];
                 int ny = ay + dy[i];
@@ -101,10 +110,10 @@ public class AI43_BOJ16236 {
                 visited[nx][ny] = true;
                 dist[nx][ny] = dist[ax][ay] + 1;
 
-                if (map[nx][ny] != 0 && map[nx][ny] < SharkSize) {
-                    fish.add(new int[]{nx, ny});
-                }
             }
         }
+        if (targetX == -1 && targetY == -1) return null;
+        return new int[]{targetX, targetY};
+
     }
 }
