@@ -8,7 +8,7 @@ import java.util.*;
 public class Day16_2_BOJ16236 {
     static int N;
     static int[][] map;
-    static Queue<int[]> q = new LinkedList<>();
+    static Queue<int[]> q;
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
     static int fishSize = 2;
