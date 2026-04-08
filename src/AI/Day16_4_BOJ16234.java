@@ -17,6 +17,7 @@ public class Day16_4_BOJ16234 {
     static boolean[][] vis;
     static boolean moved;
     static ArrayList<int[]> union;
+    static Queue<int[]> q;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -41,10 +42,12 @@ public class Day16_4_BOJ16234 {
     }
 
     private static void Sol() {
+        //다시한번 전체반복
         while (true) {
             vis = new boolean[N][N];
             moved = false;
 
+            //모든 영역 돌면서 후보군 찾고 평균 끝난곳은 방문 체크
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     if (!vis[i][j]){
@@ -68,15 +71,15 @@ public class Day16_4_BOJ16234 {
     }
 
     private static void bfs(int i, int j) {
-        Queue<int[]> q = new LinkedList<>();
+        q = new LinkedList<>();
         union = new ArrayList<>();
         sum = 0;
 
-        q.offer(new int[]{i,j});
+        q.offer(new int[]{i, j});
         union.add(new int[]{i,j});
+        sum += A[i][j];
         vis[i][j] = true;
 
-        sum += A[i][j];
         while (!q.isEmpty()) {
             int[] cur = q.poll();
 
@@ -88,13 +91,14 @@ public class Day16_4_BOJ16234 {
                 if (vis[nx][ny]) continue;
                 int diff = Math.abs(A[nx][ny] - A[cur[0]][cur[1]]);
 
-                if (diff <= R && diff >= L) {
-                    vis[nx][ny] = true;
-                    sum += A[nx][ny];
+                if (diff >= L && diff <= R) {
+                    q.offer(new int[]{nx,ny});
                     union.add(new int[]{nx, ny});
-                    q.offer(new int[]{nx, ny});
+                    sum += A[nx][ny];
+                    vis[nx][ny] = true;
                 }
             }
         }
     }
+
 }
