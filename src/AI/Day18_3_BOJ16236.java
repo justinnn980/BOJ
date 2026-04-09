@@ -55,8 +55,6 @@ public class Day18_3_BOJ16236 {
 
             int[] fish = fishs.get(0);
 
-            //거리까지 같다면 가장 왼쪽에 물고기
-
             time += fish[2];
             map[fish[0]][fish[1]] = 0;
             starti = fish[0];
