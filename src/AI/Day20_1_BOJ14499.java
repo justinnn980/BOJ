@@ -7,8 +7,6 @@ import java.util.StringTokenizer;
 
 public class Day20_1_BOJ14499 {
     static int N, M, x, y, K;
-    static int[] dx = {-1, 1, 0, 0};
-    static int[] dy = {0, 0, -1, 1};
     static int[][] map;
 
     public static void main(String[] args) throws IOException {
