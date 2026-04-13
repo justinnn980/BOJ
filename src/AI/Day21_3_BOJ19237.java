@@ -1,0 +1,182 @@
+package AI;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Day21_3_BOJ19237 {
+    static int N, M, K;
+    static int[][] map;
+    static int[] sx, sy, sd; // 상어 위치, 방향
+    static boolean[] alive; //생존 여부
+    static int[][] smellOwner;//냄새 주인번호
+    static int[][] smellTime;//남은 냄새 시간
+    static int[][][] priority;//번호,방향,우선순위
+    static int[] dx = {0, -1, 1, 0, 0};
+    static int[] dy = {0, 0, 0, -1, 1};
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
+
+        map = new int[N][N];
+        sx = new int[M + 1];
+        sy = new int[M + 1];
+        sd = new int[M + 1];
+        alive = new boolean[M + 1];
+
+        smellOwner = new int[N][N];
+        smellTime = new int[N][N];
+        priority = new int[M + 1][5][4];
+
+
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < N; j++) {
+                map[i][j] = Integer.parseInt(st.nextToken());
+                //각 상어의 시작 위치를 저장
+                if (map[i][j] != 0) {
+                    int num = map[i][j];
+                    sx[num] = i;
+                    sy[num] = j;
+                    alive[num] = true;
+                }
+            }
+        }
+
+        //초기 방향 입력
+        st = new StringTokenizer(br.readLine());
+        for (int i = 1; i <= M; i++) {
+            sd[i] = Integer.parseInt(st.nextToken());
+        }
+
+        //우선순위 입력
+        for (int i = 1; i <= M; i++) {
+            for (int d = 1; d <= 4; d++) {
+                st = new StringTokenizer(br.readLine());
+                for (int k = 0; k < 4; k++) {
+                    priority[i][d][k] = Integer.parseInt(st.nextToken());
+                }
+            }
+        }
+
+        for (int i = 1; i <= M; i++) {
+            if (alive[i]) {
+                smellOwner[sx[i]][sy[i]] = i;
+                smellTime[sx[i]][sy[i]] = K;
+            }
+        }
+
+        int time = 0;
+
+        while (time < 1000) {
+            time++;
+
+            //임시배열
+            int[] nsx = new int[M + 1];
+            int[] nsy = new int[M + 1];
+            int[] nsd = new int[M + 1];
+
+            //모든 상어가 이동할 칸 결정
+            for (int i = 1; i <= M; i++) {
+                if (!alive[i]) continue;
+
+                // i번 상어의 다음 칸 결정
+                boolean moved = false;
+
+                // 1. 냄새 없는 칸 찾기
+                for (int k = 0; k < 4; k++) {
+                    int nd = priority[i][sd[i]][k];
+                    int nx = sx[i] + dx[nd];
+                    int ny = sy[i] + dy[nd];
+
+                    // 범위 체크
+                    if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
+
+                    if (smellTime[nx][ny] == 0) {
+                        nsx[i] = nx;
+                        nsy[i] = ny;
+                        nsd[i] = nd;
+                        moved = true;
+                        break;
+                    }
+                }
+
+                // 2. 없으면 자기 냄새 칸 찾기
+                if (!moved) {
+                    for (int k = 0; k < 4; k++) {
+                        int nd = priority[i][sd[i]][k];
+                        int nx = sx[i] + dx[nd];
+                        int ny = sy[i] + dy[nd];
+
+                        // 범위 체크
+                        if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
+
+                        if (smellOwner[nx][ny] == i && smellTime[nx][ny] > 0) {
+                            nsx[i] = nx;
+                            nsy[i] = ny;
+                            nsd[i] = nd;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            //충돌 처리해서 작은 번호만 생존
+            int[][] nextMap = new int[N][N];
+
+            for (int i = 1; i <= M; i++) {
+                if (!alive[i]) continue;
+
+                int nx = nsx[i];
+                int ny = nsy[i];
+
+                if (nextMap[nx][ny] == 0) {
+                    nextMap[nx][ny] = i;
+                } else {
+                    alive[i] = false;
+                }
+            }
+
+            // 위치 갱신
+            for (int i = 1; i <= M; i++) {
+                if (!alive[i]) continue;
+                sx[i] = nsx[i];
+                sy[i] = nsy[i];
+                sd[i] = nsd[i];
+            }
+            map = nextMap;
+            //냄새 1 감소
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (smellTime[i][j] > 0) {
+                        smellTime[i][j]--;
+                        if (smellTime[i][j] == 0) smellOwner[i][j] = 0;
+                    }
+                }
+            }
+
+            //살아있는 상어가 새 냄새 남김
+            for (int i = 1; i <= M; i++) {
+                if (!alive[i]) continue;
+                smellOwner[sx[i]][sy[i]] = i;
+                smellTime[sx[i]][sy[i]] = K;
+            }
+            //1번 상어만 남았는지 확인
+            int cnt = 0;
+            for (int i = 1; i <= M; i++) {
+                if (alive[i]) cnt++;
+            }
+            if (cnt == 1 && alive[1]) {
+                System.out.println(time);
+                return;
+            }
+        }
+        System.out.println(-1);
+    }
+}
